@@ -20,4 +20,22 @@ class myPDO extends PDO{
     private function _setEncode(){
         $this->query("SET NAMES '{$this->_encode}");
     }
+
+    function bindQuery($sql,array $bind = []){
+        $this->_stmt = $this->prepare($sql);
+        $this->_bind($bind);
+        $this->_stmt->execute();
+        return $this->_stmt->fetchall();
+    }
+
+    private function _bind($bind){
+        foreach($bind as $key => $value){
+            $this->_stmt->bindValue($key, $value, is_numeric($value)?PDO::PARAM_INT:PDO::PARAM_STR);
+        }
+    }
+    function error(){
+        $error = $this->_stmt->errorInfo();
+        echo 'errorCode:'.$error[0].'<br>';
+        echo 'errorString:'.$error[2].'<br>';
+    }
 }
