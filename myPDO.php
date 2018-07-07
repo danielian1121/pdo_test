@@ -71,6 +71,35 @@ class myPDO extends PDO{
         $this->_stmt = $this->prepare($sql);
         $this->_bind($bind_data);
         $this->_stmt->execute();
-        return $this->lastInsertId();//回傳insert後的id
+        $this->lastInsertId();//回傳insert後的id
+    }
+
+    function get_last_id(){
+        return $this->lastInsertId();
+    }
+
+    //update功能整合（包括bind）
+    function update($table, array $param = [], $id = false){
+        //確認id是否有設置，沒有便返回false
+        if($id == false && ! ($id = $this->id)){
+            return false;
+        }
+        $data = array_merge($this->_data,$param);
+        $bind_temp = [];
+        $bind_value = [];
+        foreach($data as $key => $value){
+            //因為id不能被設置，所以要把id從array中移除
+            if($key != 'id'){
+                $bind_temp[] = "{$key} = :{$key}";
+                $bind_value[":{$key}"] = $value;
+            }
+        }
+        $sql = "UPDATE {$table} SET ".implode(',',$bind_temp)." WHERE id = :id";
+        $this->_stmt = $this->prepare($sql);
+        $this->_bind($bind_value);
+        //為id做bind
+        $temp = [':id' => "$id"];
+        $this->_bind($temp);
+        $this->_stmt->execute();
     }
 }

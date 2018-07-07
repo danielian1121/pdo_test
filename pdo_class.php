@@ -15,5 +15,5 @@ $post = [
     'password' => "$password"
 ];
 
-echo $pdo->insert('test',$post);
+$pdo->update('test',$post,4);
 
