@@ -4,6 +4,7 @@ require_once('myPDO.php');
 if(isset($_POST['submit'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $id = $_POST['id'];
     if(!($username && $password)){
         echo "Input Error";
     }
@@ -12,8 +13,8 @@ if(isset($_POST['submit'])){
 $pdo = new myPDO;
 $post = [
     'username' => "$username",
-    'password' => "$password"
+    'password' => "$password",
 ];
 
-$pdo->update('test',$post,4);
+$pdo->update('test',$post,$id);
 

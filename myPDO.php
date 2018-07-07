@@ -56,6 +56,13 @@ class myPDO extends PDO{
         return $this->_data;
     }
 
+    function getID(){
+        $sql = "SELECT * FROM test ORDER BY id ASC";
+        $query = $this->query($sql);
+        $query->setFetchMode(PDO::FETCH_ASSOC);
+        return $query;
+    }
+
     //insert功能整合（包括bind）
     function insert($table, array $param = []){
         $data = array_merge($this->_data,$param);//若value是post進來，便和原本的data做合併
