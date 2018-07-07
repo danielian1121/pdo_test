@@ -109,4 +109,17 @@ class myPDO extends PDO{
         $this->_bind($temp);
         $this->_stmt->execute();
     }
+
+    function delete($table, array $param = []){
+        if(!isset($param)){
+            return false;
+        }
+        foreach($param as $key => $value){
+            $temp = [':id' => "$value"];
+            $sql = "DELETE FROM {$table} WHERE id = :id";
+            $this->_stmt = $this->prepare($sql);
+            $this->_bind($temp);
+            $this->_stmt->execute();
+        }
+    }
 }
