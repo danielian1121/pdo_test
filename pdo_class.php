@@ -11,10 +11,11 @@ if(isset($_POST['submit'])){
 }
 
 $pdo = new myPDO;
-$post = [
+/*$post = [
     'username' => "$username",
     'password' => "$password",
-];
+];*/
+$post = [4,5,6,7,8];
 
-$pdo->update('test',$post,$id);
+$pdo->delete('test',$post);
 
