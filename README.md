@@ -1,2 +1,8 @@
 # pdo_test
-pdo
+some **PDO** practice
+
+## create
+
+## insert
+
+## delete
