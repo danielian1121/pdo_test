@@ -10,12 +10,10 @@ if(isset($_POST['submit'])){
 }
 
 $pdo = new myPDO;
+$post = [
+    'username' => "$username",
+    'password' => "$password"
+];
 
-$query = $pdo->bindQuery("SELECT * FROM test WHERE username LIKE :username LIMIT :limit",[
-    ':username' => "%{$username}%",
-    ':limit' => 10
-]);
-foreach($query as $row){
-    echo $row['username'].'<br>';
-}
+echo $pdo->insert('test',$post);
 

@@ -9,9 +9,8 @@
 <body>
     <form action="pdo_class.php" method="post">
         <input type="text" name="username"></input><br>
-        <input type="text" name="password"></input><br>
+        <input type="password" name="password"></input><br>
         <input type="submit" name="submit" value="Submit"></input>
-
     </form>
     
     
